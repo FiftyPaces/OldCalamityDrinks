@@ -22,8 +22,6 @@ namespace OldCalamityDrinks.Content.Buffs
             var modPlayer = player.GetModPlayer<GrapeBeerPlayer>();
             modPlayer.grapeBeer = true;
             modPlayer.critDamage -= GrapeBeer.CritLoss * 0.01f;
-            player.statDefense *= 0.97f;
-            player.moveSpeed *= 0.95f;
         }
     }
 }

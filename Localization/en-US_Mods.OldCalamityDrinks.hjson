@@ -3,10 +3,9 @@ Items: {
 		DisplayName: Grape Beer 2.1
 		Tooltip:
 			'''
-			Bullets, Arrows, Darts, and Rockets gain homing
+			Bullets, arrows, darts, and rockets gain homing
 			75% reduced critical strike damage
-			3% reduced defense
-			5% reduced movement speed
+			Drinking more than three types of alcohol might not be good for your liver
 			'''
 	}
 }
@@ -14,6 +13,6 @@ Items: {
 Buffs: {
 	GrapeBeerDebuff: {
 		DisplayName: Grape Beer 2.1
-		Description: Ranged projectiles gain homing, reduced critical strike damage, defense, and movement speed
+		Description: Ranged projectiles gain homing, but critical strike damage is reduced
 	}
 }

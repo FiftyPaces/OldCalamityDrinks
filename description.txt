@@ -1,1 +1,2 @@
-还原灾厄模组 2.1 版本的葡萄啤酒，采用与灾厄 2.1.2 完全一致的追踪算法和数值。子弹、箭矢、飞镖、火箭获得 600px 强力追踪，暴击伤害 -75%，防御 -3%，移速 -5%。兼容「更好的体验」无限增益开关。
+还原灾厄 2.1 葡萄啤酒：子弹/箭矢/飞镖/火箭 600px 追踪，暴击伤害 -75%。兼容「更好的体验」开关。
+Restores Calamity 2.1 Grape Beer: homing for bullets/arrows/darts/rockets (600px), crit damage -75%. BE toggle supported.

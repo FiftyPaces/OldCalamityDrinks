@@ -65,7 +65,10 @@ namespace OldCalamityDrinks.Content.Projectiles
 
         public override void PostAI(Projectile projectile)
         {
+            GrapeBeerPlayer modPlayer = Main.player[projectile.owner].GetModPlayer<GrapeBeerPlayer>();
             if (conditionalHomingRange > 0f &&
+                modPlayer.grapeBeer &&
+                !modPlayer.disabledByBE &&
                 Main.player[projectile.owner].heldProj != projectile.whoAmI &&
                 projectile.aiStyle != ProjAIStyleID.HeldProjectile)
             {
