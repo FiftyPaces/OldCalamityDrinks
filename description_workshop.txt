@@ -1,35 +1,33 @@
-还原灾厄 2.1 葡萄啤酒的原始追踪效果。Restores Calamity 2.1 Grape Beer homing.
+[b]🍇 葡萄啤酒 – 经典追踪[/b]
 
----
+[hr]
+[b]效果[/b]
+子弹、箭、飞镖、火箭获得强力自动追踪，分裂弹继承追踪。
 
-### 效果 Effects
+[b]代价[/b]
+暴击伤害降低 75%。
 
-**追踪 Homing** — 子弹、箭矢、飞镖、火箭
-Bullets, Arrows, Darts, Rockets
-> 600px 范围 · 灾厄 2.1.2 同款算法 (惯性 20 / 速度 12) · 链式弹幕继承
+[b]制作[/b]
+肉后于酒桶制作，支持批量合成。
 
-**代价 Trade-off** — 暴击伤害 Critical damage **-75%**
+[b]兼容[/b]
+独立物品，兼容更好的体验增益开关，与官方灾厄无冲突。
 
----
+[hr]
+[b]🍇 Grape Beer – Classic Homing[/b]
 
-### 配方 Recipe
+[hr]
+[b]Effect[/b]
+Bullets, arrows, darts, and rockets gain strong auto-homing. Split projectiles inherit homing.
 
-| 材料 | 数量 |
-|------|------|
-| 玻璃瓶 Bottle | ×10 |
-| 葡萄 Grapes | ×1 |
-| ➜ 葡萄啤酒 Grape Beer | ×10 |
+[b]Cost[/b]
+Crit damage reduced by 75%.
 
-制作站 Crafting station: 酒桶 Keg
+[b]Crafting[/b]
+At the Keg after Hardmode. Batch crafting supported.
 
----
+[b]Compatibility[/b]
+Standalone item. Compatible with Better Experience's buff toggle. No conflicts with official Calamity.
 
-### 兼容 Compatibility
-
-支持「更好的体验」无限增益开关。BE infinite buff toggle supported.
-
----
-
-### 源码 Source
-
-github.com/FiftyPaces/OldCalamityDrinks
+[hr]
+[url=https://github.com/FiftyPaces/OldCalamityDrinks]GitHub[/url]
