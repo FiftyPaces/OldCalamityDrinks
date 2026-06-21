@@ -1,12 +1,48 @@
-恢复灾厄模组 2.1 版本的葡萄啤酒。
+## 葡萄啤酒2.1 (Grape Beer 2.1)
 
-效果：
-• 子弹、箭矢、飞镖和火箭获得 600px 强力追踪（还原灾厄 2.1.2 算法）
-• 暴击伤害 -75%
-• 防御 -3%
-• 移动速度 -5%
-• 持续 6 分钟
+灾厄模组 (Calamity Mod) 在 2.1 之后的版本中大幅削弱了葡萄啤酒的追踪能力。本模组旨在还原 2.1 版本的原始效果，让葡萄啤酒重回巅峰。
 
-配方：酒桶处 10 玻璃瓶 + 1 葡萄 → 葡萄啤酒 ×10
+In later versions of Calamity Mod, Grape Beer's homing capability was significantly nerfed. This mod restores the original 2.1 version with full-strength homing.
 
-兼容：更好的体验 (ImproveGame) 无限增益开关
+---
+
+### 效果 Effects
+
+所有远程弹幕获得强力追踪，追踪范围 600 像素，采用灾厄 2.1.2 完全一致的 HomeInOnNPC 算法（惯性 20，追踪速度 12）。支持弹幕链式追踪——水晶子弹碎片、流星箭尾焰等次级弹幕均可继承追踪。
+
+All ranged projectiles gain homing with 600px range, using the exact Calamity 2.1.2 HomeInOnNPC algorithm (inertia=20, homingVelocity=12). Chain homing supported for secondary projectiles.
+
+**正面效果 Positive：**
+- 子弹追踪 Bullets homing
+- 箭矢追踪 Arrows homing
+- 飞镖追踪 Darts homing
+- 火箭追踪 Rockets homing
+
+**负面效果 Negative：**
+- 暴击伤害 Critical strike damage -75%
+- 防御 Defense -3%
+- 移动速度 Movement speed -5%
+
+---
+
+### 获取方式 Recipe
+
+在酒桶处制作，无需困难模式：
+
+- 玻璃瓶 Bottle ×10
+- 葡萄 Grapes ×1
+- 产物：葡萄啤酒 Grape Beer ×10
+
+---
+
+### 兼容性 Compatibility
+
+完美支持「更好的体验」(ImproveGame / Quality of Terraria) 无限增益开关。打开增益控制器，点击葡萄啤酒图标即可随时开启或关闭全部四种效果，图标变暗即表示已禁用。
+
+Full BE/ImproveGame infinite buff toggle support — all four effects can be toggled on/off from the buff controller panel.
+
+---
+
+### 源码 Source Code
+
+https://github.com/FiftyPaces/OldCalamityDrinks
