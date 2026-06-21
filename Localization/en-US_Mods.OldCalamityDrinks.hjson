@@ -1,0 +1,19 @@
+Items: {
+	GrapeBeer: {
+		DisplayName: Grape Beer 2.1
+		Tooltip:
+			'''
+			Bullets, Arrows, Darts, and Rockets gain homing
+			75% reduced critical strike damage
+			3% reduced defense
+			5% reduced movement speed
+			'''
+	}
+}
+
+Buffs: {
+	GrapeBeerDebuff: {
+		DisplayName: Grape Beer 2.1
+		Description: Ranged projectiles gain homing, reduced critical strike damage, defense, and movement speed
+	}
+}

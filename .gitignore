@@ -1,0 +1,15 @@
+# Build output
+bin/
+obj/
+
+# IDE
+.vscode/
+.idea/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# tModLoader
+*.tmod
