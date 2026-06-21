@@ -1,4 +1,5 @@
 using OldCalamityDrinks.Content.Items;
+using OldCalamityDrinks.Content.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +10,7 @@ namespace OldCalamityDrinks.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
+            Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = false;
             Main.persistentBuff[Type] = true;
@@ -17,10 +19,11 @@ namespace OldCalamityDrinks.Content.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            var modPlayer = player.GetModPlayer<Players.GrapeBeerPlayer>();
+            var modPlayer = player.GetModPlayer<GrapeBeerPlayer>();
             modPlayer.grapeBeer = true;
             modPlayer.critDamage -= GrapeBeer.CritLoss * 0.01f;
-            modPlayer.buffActive = true;
+            player.statDefense *= 0.97f;
+            player.moveSpeed *= 0.95f;
         }
     }
 }

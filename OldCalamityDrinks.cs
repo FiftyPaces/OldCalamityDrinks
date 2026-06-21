@@ -1,15 +1,24 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OldCalamityDrinks.Content.Buffs;
+using OldCalamityDrinks.Content.Items;
 using Terraria.ModLoader;
 
 namespace OldCalamityDrinks
 {
-	// Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
-	public class OldCalamityDrinks : Mod
-	{
-
-	}
+    public class OldCalamityDrinks : Mod
+    {
+        public override void PostSetupContent()
+        {
+            if (ModLoader.TryGetMod("ImproveGame", out Mod improveGame))
+            {
+                try
+                {
+                    improveGame.Call("AddPotion",
+                        ModContent.ItemType<GrapeBeer>(),
+                        new List<int> { ModContent.BuffType<GrapeBeerDebuff>() });
+                }
+                catch { }
+            }
+        }
+    }
 }

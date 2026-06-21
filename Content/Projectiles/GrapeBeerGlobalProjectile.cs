@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using OldCalamityDrinks.Content.Buffs;
 using OldCalamityDrinks.Content.Players;
 using Terraria;
 using Terraria.DataStructures;
@@ -18,94 +17,72 @@ namespace OldCalamityDrinks.Content.Projectiles
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            // === Grape Beer ammo-based homing ===
+            void ApplyGrapeBeer()
+            {
+                grapeBeer = true;
+                conditionalHomingRange = 600;
+                if (projectile.timeLeft > 300 * projectile.MaxUpdates)
+                    projectile.timeLeft = 300 * projectile.MaxUpdates;
+                projectile.usesLocalNPCImmunity = true;
+                projectile.localNPCHitCooldown = -1;
+            }
+
             if (source is EntitySource_ItemUse_WithAmmo { Item: Item item })
             {
                 if (source is EntitySource_Parent { Entity: Player player })
                 {
-                    GrapeBeerPlayer modPlayer = player.GetModPlayer<GrapeBeerPlayer>();
-                    if (modPlayer.grapeBeer &&
+                    if (player.GetModPlayer<GrapeBeerPlayer>().grapeBeer &&
                         (item.useAmmo == AmmoID.Bullet || item.useAmmo == AmmoID.Arrow ||
                          item.useAmmo == AmmoID.Dart || item.useAmmo == AmmoID.Rocket))
                     {
                         if (player.heldProj != projectile.whoAmI &&
                             projectile.aiStyle != ProjAIStyleID.HeldProjectile &&
                             projectile.damage > 0)
-                        {
-                            ApplyGrapeBeer(projectile);
-                        }
+                            ApplyGrapeBeer();
                         else
-                        {
                             grapeBeer = true;
-                        }
                     }
                 }
             }
 
-            // === Grape Beer chain homing (child projectiles inherit from parent) ===
             if (source is EntitySource_Parent { Entity: NPC npc })
             {
             }
             else if (source is EntitySource_Parent { Entity: Projectile parent })
             {
-                GrapeBeerGlobalProjectile parentGlobal = parent.GetGlobalProjectile<GrapeBeerGlobalProjectile>();
-                if (parentGlobal.grapeBeer)
+                //Grape Beer homing
+                if (parent.GetGlobalProjectile<GrapeBeerGlobalProjectile>().grapeBeer)
                 {
                     if (Main.player[projectile.owner].heldProj != projectile.whoAmI &&
                         projectile.aiStyle != ProjAIStyleID.HeldProjectile &&
                         projectile.damage > 0)
-                    {
-                        ApplyGrapeBeer(projectile);
-                    }
+                        ApplyGrapeBeer();
                     else
-                    {
                         grapeBeer = true;
-                    }
                 }
             }
         }
 
-        private static void ApplyGrapeBeer(Projectile projectile)
-        {
-            GrapeBeerGlobalProjectile g = projectile.GetGlobalProjectile<GrapeBeerGlobalProjectile>();
-            g.grapeBeer = true;
-            g.conditionalHomingRange = 600;
-            if (projectile.timeLeft > 300 * projectile.MaxUpdates)
-                projectile.timeLeft = 300 * projectile.MaxUpdates;
-            projectile.usesLocalNPCImmunity = true;
-            projectile.localNPCHitCooldown = -1;
-        }
-
-        private static readonly int BuffType = ModContent.BuffType<GrapeBeerDebuff>();
-
         public override void PostAI(Projectile projectile)
         {
-            GrapeBeerGlobalProjectile g = projectile.GetGlobalProjectile<GrapeBeerGlobalProjectile>();
-
-            // grapeBeer and disabledByBE are computed in GrapeBeerPlayer.PostUpdate(),
-            // which runs AFTER BetterExperience's PostUpdateBuffs (CleanupBuffByBlacklist).
-            // So they always reflect the correct state for this frame.
-            Player owner = Main.player[projectile.owner];
-            GrapeBeerPlayer modPlayer = owner.GetModPlayer<GrapeBeerPlayer>();
-            if (g.conditionalHomingRange > 0f &&
-                modPlayer.grapeBeer &&
-                !modPlayer.disabledByBE &&
-                owner.heldProj != projectile.whoAmI &&
+            if (conditionalHomingRange > 0f &&
+                Main.player[projectile.owner].heldProj != projectile.whoAmI &&
                 projectile.aiStyle != ProjAIStyleID.HeldProjectile)
             {
-                HomeInOnNPC(projectile, g, !projectile.tileCollide, g.conditionalHomingRange, 12f, 20f, true);
+                HomeInOnNPC(projectile, !projectile.tileCollide, conditionalHomingRange, 12f, 20f, true);
             }
         }
 
         /// <summary>
-        /// Clone of CalamityUtils.HomeInOnNPC, matching Calamity 2.1.2 behavior exactly.
+        /// Clone of CalamityUtils.HomeInOnNPC from Calamity 2.1.2.
         /// </summary>
-        private static void HomeInOnNPC(Projectile projectile, GrapeBeerGlobalProjectile g,
-            bool ignoreTiles, float distanceRequired, float homingVelocity, float inertia, bool respectIFrames)
+        private static void HomeInOnNPC(Projectile projectile, bool ignoreTiles,
+            float distanceRequired, float homingVelocity, float inertia, bool respectIFrames)
         {
             if (!projectile.friendly)
                 return;
 
+            GrapeBeerGlobalProjectile g = projectile.GetGlobalProjectile<GrapeBeerGlobalProjectile>();
             if (g.defExtraUpdates == -1)
                 g.defExtraUpdates = projectile.extraUpdates;
 
@@ -149,7 +126,8 @@ namespace OldCalamityDrinks.Content.Projectiles
                 projectile.extraUpdates = g.defExtraUpdates + 1;
 
                 Vector2 homeDirection = (destination - projectile.Center).SafeNormalize(Vector2.UnitY);
-                projectile.velocity = (projectile.velocity * inertia + homeDirection * homingVelocity) / (inertia + 1f);
+                projectile.velocity = (projectile.velocity * inertia + homeDirection * homingVelocity) /
+                                       (inertia + 1f);
             }
             else
             {
