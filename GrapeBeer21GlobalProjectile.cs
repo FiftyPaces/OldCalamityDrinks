@@ -24,6 +24,8 @@ namespace GrapeBeer21Mod
                     projectile.timeLeft = 300 * projectile.MaxUpdates;
                 projectile.usesLocalNPCImmunity = true;
                 projectile.localNPCHitCooldown = -1;
+                // 防止子弹命中后设置NPC全局免疫，确保爆炸弹的爆炸伤害能命中同一目标
+                projectile.appliesImmunityTimeOnSingleHits = false;
             }
 
             if (source is EntitySource_ItemUse_WithAmmo { Item: Item item })
