@@ -67,14 +67,15 @@ namespace GrapeBeer21Mod
                 && Main.player[projectile.owner].heldProj != projectile.whoAmI
                 && projectile.aiStyle != ProjAIStyleID.HeldProjectile)
             {
-                HomeInOnNPC(projectile, !projectile.tileCollide, homingRange, 12f, 20f);
+                // 与2.1.2 CalamityUtils.HomeInOnNPC(projectile, !tileCollide, range, 12f, 20f, true) 完全一致
+                HomeInOnNPC(projectile, !projectile.tileCollide, homingRange, 12f, 20f, true);
             }
         }
 
         /// <summary>
-        /// 独立追踪实现，匹配灾厄2.1.2的 HomeInOnNPC 行为（不含extraUpdates操作）
+        /// 完全复刻灾厄2.1.2 ProjectileUtils.HomeInOnNPC 逻辑
         /// </summary>
-        private static void HomeInOnNPC(Projectile projectile, bool ignoreTiles, float distanceRequired, float homingVelocity, float inertia)
+        private static void HomeInOnNPC(Projectile projectile, bool ignoreTiles, float distanceRequired, float homingVelocity, float inertia, bool respectIFrames)
         {
             if (!projectile.friendly)
                 return;
@@ -88,10 +89,14 @@ namespace GrapeBeer21Mod
             foreach (NPC n in Main.ActiveNPCs)
             {
                 float extraDistance = (n.width / 2) + (n.height / 2);
-                if (!n.CanBeChasedBy(projectile, false) || !projectile.WithinRange(n.Center, maxDistance + extraDistance))
+                if (!n.CanBeChasedBy(projectile, false)
+                    || !projectile.WithinRange(n.Center, maxDistance + extraDistance)
+                    || (respectIFrames && (projectile.localNPCImmunity[n.whoAmI] > 0 || n.immune[projectile.owner] > 0)))
                     continue;
 
                 float currentNPCDist = Vector2.Distance(n.Center, projectile.Center);
+                if (respectIFrames && Projectile.perIDStaticNPCImmunity[projectile.type][n.whoAmI] > Main.GameUpdateCount)
+                    currentNPCDist += 1600f;
                 if (currentNPCDist < npcDistCompare && (ignoreTiles || Collision.CanHit(projectile.Center, 1, 1, n.Center, 1, 1)))
                 {
                     npcDistCompare = currentNPCDist;
