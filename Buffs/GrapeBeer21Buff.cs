@@ -47,7 +47,7 @@ namespace GrapeBeer21Mod.Buffs
             try
             {
                 var infPlayer = typeof(Player)
-                    .GetMethod("GetModPlayer", Type.EmptyTypes)
+                    .GetMethod("GetModPlayer", System.Type.EmptyTypes)
                     ?.MakeGenericMethod(_infPlayerType)
                     .Invoke(player, null);
                 if (infPlayer == null) return false;
