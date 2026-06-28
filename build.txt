@@ -1,0 +1,10 @@
+displayName = Grape Beer 2.1
+author = FiftyPaces
+version = 1.0.0.0
+modReferences = CalamityMod
+homepage = https://github.com/tModLoader/tModLoader
+hideCode = false
+hideResources = false
+includeSource = true
+buildIgnore = *.pdb,*.vs,*.vscode,*.md,.git,obj,bin
+includePDB = false

@@ -1,0 +1,30 @@
+Mods: {
+	$parentVal: GrapeBeer21Mod:
+
+	GrapeBeer21Mod: {
+		Items: {
+			GrapeBeer21: {
+				Tooltip: ""
+				DisplayName: Grape Beer21
+			}
+		}
+
+		Buffs: {
+			GrapeBeer21Buff: {
+				Description: Mods.GrapeBeer21Mod.Buffs.GrapeBeer21Buff.Description
+				DisplayName: Grape Beer21 Buff
+			}
+		}
+	}
+}
+
+Items: GrapeBeer21:
+DisplayName: Grape Beer 2.1
+Tooltip:
+	'''
+	Bullets, Arrows, Darts, and Rockets gain homing
+	{0}% reduced critical strike damage
+	{$Common.AlcoholWarning}
+	'''
+Buffs: GrapeBeer21Buff:
+Description: Ranged projectiles gain homing, reduced critical strike damage

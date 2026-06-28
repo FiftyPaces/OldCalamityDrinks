@@ -1,0 +1,1 @@
+Grape Beer 2.1 is a standalone alcohol potion that grants homing to ranged projectiles (Bullets, Arrows, Darts, and Rockets) at the cost of reduced critical strike damage. Made as a learning example based on the Calamity Mod's GrapeBeer.
